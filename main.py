@@ -1,19 +1,28 @@
 import winreg
 
-from windowstheme import WindowsTheme
+from windowstheme import WindowsTheme, Theme, ThemeColor
 
 if __name__ == '__main__':
-    theme = WindowsTheme()
+    a320Theme = Theme(
+        dwmAccentColor=4288052579,
+        dwmAccentColorInactive=4288052579,
+        dwmColorPrevalence=True,
+        explorerAccentColorMenu=4288052579
+    )
 
-    theme.setDwmAccentColor(4288052579)
-    theme.setDwmAccentColorInactive(4288052579)
-    theme.setDwmColorPrevalence(1)
-    theme.setExplorerAccentColor(4288052579)
+    original = Theme(
+        dwmAccentColor=4279654135,
+        dwmAccentColorInactive=4288052579,
+        dwmColorPrevalence=False,
+        explorerAccentColorMenu=4279654135
+    )
 
-    print(theme.getDwmAccentColor())
-    print(theme.getDwmAccentColorInactive())
-    print(theme.getDwmColorPrevalence())
-    print(theme.getExplorerAccentColor())
+    #WindowsTheme().loadTheme(original)
+    color = ThemeColor.fromRegDword(original.dwmAccentColor)
+    print(color)
+    print(color.toRegDword())
+
+
 
     # A320
     #4288052579
