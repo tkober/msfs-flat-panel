@@ -2,14 +2,6 @@ import winreg
 from dataclasses import dataclass
 
 
-@dataclass
-class Theme:
-    dwmAccentColor: int
-    dwmAccentColorInactive: int
-    dwmColorPrevalence: bool
-    explorerAccentColorMenu: int
-
-
 @dataclass()
 class ThemeColor:
     r: int
@@ -26,6 +18,14 @@ class ThemeColor:
         b = bytes[2]
 
         return ThemeColor(r=r, g=g, b=b)
+
+
+@dataclass
+class Theme:
+    dwmAccentColor: ThemeColor
+    dwmAccentColorInactive: ThemeColor
+    dwmColorPrevalence: bool
+    explorerAccentColorMenu: ThemeColor
 
 
 class WindowsTheme:
@@ -59,20 +59,22 @@ class WindowsTheme:
         self.setExplorerAccentColor(theme.explorerAccentColorMenu)
 
     # Accent Color
-    def getDwmAccentColor(self) -> int:
+    def getDwmAccentColor(self) -> ThemeColor:
         result, _ = self.__getRegistryIntValue(self.__DwmRegistrySubkey, self.__dwmAccentColorValue)
-        return result
+        return ThemeColor.fromRegDword(result)
 
-    def setDwmAccentColor(self, value: int):
-        self.__setRegistryIntValue(self.__DwmRegistrySubkey, self.__dwmAccentColorValue, value)
+    def setDwmAccentColor(self, value: ThemeColor):
+        regDwordValue = value.toRegDword()
+        self.__setRegistryIntValue(self.__DwmRegistrySubkey, self.__dwmAccentColorValue, regDwordValue)
 
     # Accent Color Inactive
-    def getDwmAccentColorInactive(self) -> int:
+    def getDwmAccentColorInactive(self) -> ThemeColor:
         result, _ = self.__getRegistryIntValue(self.__DwmRegistrySubkey, self.__dwmAccentColorInactiveValue)
-        return result
+        return ThemeColor.fromRegDword(result)
 
-    def setDwmAccentColorInactive(self, value: int):
-        self.__setRegistryIntValue(self.__DwmRegistrySubkey, self.__dwmAccentColorInactiveValue, value)
+    def setDwmAccentColorInactive(self, value: ThemeColor):
+        regDwordValue = value.toRegDword()
+        self.__setRegistryIntValue(self.__DwmRegistrySubkey, self.__dwmAccentColorInactiveValue, regDwordValue)
 
     # Color Prevalence
     def getDwmColorPrevalence(self) -> bool:
@@ -83,9 +85,10 @@ class WindowsTheme:
         self.__setRegistryIntValue(self.__DwmRegistrySubkey, self.__dwmColorPrevalenceValue, int(value))
 
     # Accent Color Menu
-    def getExplorerAccentColor(self) -> int:
+    def getExplorerAccentColor(self) -> ThemeColor:
         result, _ = self.__getRegistryIntValue(self.__WindowsExplorerAccentRegistrySubkey, self.__explorerAccentColorMenuValue)
-        return result
+        return ThemeColor.fromRegDword(result)
 
-    def setExplorerAccentColor(self, value: int):
-        self.__setRegistryIntValue(self.__WindowsExplorerAccentRegistrySubkey, self.__explorerAccentColorMenuValue, value)
+    def setExplorerAccentColor(self, value: ThemeColor):
+        regDwordValue = value.toRegDword()
+        self.__setRegistryIntValue(self.__WindowsExplorerAccentRegistrySubkey, self.__explorerAccentColorMenuValue, regDwordValue)
