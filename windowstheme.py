@@ -11,7 +11,7 @@ class WindowsTheme:
         self.__dwmAccentColorInactiveValue = 'AccentColorInactive'
         self.__dwmColorPrevalenceValue = 'ColorPrevalence'
 
-        self.__explorerAccentColorMenu = 'AccentColorMenu'
+        self.__explorerAccentColorMenuValue = 'AccentColorMenu'
 
     def __getRegistryIntValue(self, hSubKey: str, valueName: str) -> (int, int):
         keyh = winreg.OpenKey(self.__registryHkey, hSubKey)
@@ -50,8 +50,8 @@ class WindowsTheme:
 
     # Accent Color Menu
     def getExplorerAccentColor(self) -> int:
-        result, _ = self.__getRegistryIntValue(self.__WindowsExplorerAccentRegistrySubkey, self.__explorerAccentColorMenu)
+        result, _ = self.__getRegistryIntValue(self.__WindowsExplorerAccentRegistrySubkey, self.__explorerAccentColorMenuValue)
         return result
 
     def setExplorerAccentColor(self, value: int):
-        self.__setRegistryIntValue(self.__WindowsExplorerAccentRegistrySubkey, self.__explorerAccentColorMenu, value)
+        self.__setRegistryIntValue(self.__WindowsExplorerAccentRegistrySubkey, self.__explorerAccentColorMenuValue, value)
