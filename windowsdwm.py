@@ -22,6 +22,6 @@ class WindowsDwm:
         result, _ = self.__getDwmValue(self.__accentColorInactive)
         return result
 
-    def getColorPrevalence(self) -> int:
+    def getColorPrevalence(self) -> bool:
         result, _ = self.__getDwmValue(self.__colorPrevalence)
-        return result
+        return bool(result)
