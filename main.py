@@ -1,4 +1,7 @@
+import json
+
 from windowstheme import WindowsTheme, Theme, ThemeColor
+from dataclasses import asdict
 
 if __name__ == '__main__':
     orange = ThemeColor(r=247, g=86, b=22)
@@ -18,17 +21,7 @@ if __name__ == '__main__':
         explorerAccentColorMenu=orange
     )
 
-    WindowsTheme().loadTheme(a320Theme)
+    WindowsTheme().loadTheme(original)
 
-
-
-    # A320
-    #4288052579
-    #4288052579
-    #True
-
-    # Normal
-    #4279654135
-    #4288052579
-    #False
-    #4279654135
+    theme = WindowsTheme().currentTheme()
+    print(json.dumps(asdict(theme), indent=4))
