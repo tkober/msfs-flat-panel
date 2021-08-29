@@ -21,6 +21,13 @@ class ThemeColor:
 
         return ThemeColor(r=r, g=g, b=b)
 
+    def fromJsonObject(jsonObject: dict):
+        return ThemeColor(
+            r=jsonObject['r'],
+            g=jsonObject['g'],
+            b=jsonObject['b']
+        )
+
 
 @dataclass
 class Theme:
@@ -32,6 +39,30 @@ class Theme:
 
     def toJson(self, indent=4) -> str:
         return json.dumps(asdict(self), indent=indent)
+
+    def fromFile(path: str):
+        file = open(path)
+        jsonObject = json.load(file)
+        file.close()
+
+        dwmAccentColor = ThemeColor.fromJsonObject(jsonObject['dwmAccentColor'])
+        dwmAccentColorInactive = ThemeColor.fromJsonObject(jsonObject['dwmAccentColorInactive'])
+        explorerAccentColorMenu = ThemeColor.fromJsonObject(jsonObject['explorerAccentColorMenu'])
+        dwmColorPrevalence = jsonObject['dwmColorPrevalence']
+        wallpaper = jsonObject['wallpaper']
+
+        return Theme(
+            dwmAccentColor=dwmAccentColor,
+            dwmAccentColorInactive=dwmAccentColorInactive,
+            explorerAccentColorMenu=explorerAccentColorMenu,
+            dwmColorPrevalence=dwmColorPrevalence,
+            wallpaper=wallpaper
+        )
+
+    def toFile(self, path: str, indent=4):
+        file = open(path, 'w')
+        file.write(self.toJson(indent=indent))
+        file.close()
 
 
 class WindowsThemeInterface:
