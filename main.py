@@ -1,3 +1,5 @@
+import json
+
 from windowstheme import WindowsThemeInterface, Theme, ThemeColor
 
 if __name__ == '__main__':
@@ -20,5 +22,5 @@ if __name__ == '__main__':
         wallpaper='c:\\windows\\web\\wallpaper\\windows\\img0.jpg'
     )
 
-    WindowsThemeInterface().loadTheme(original)
-    print(WindowsThemeInterface().currentTheme().toJson())
+    WindowsThemeInterface().currentTheme().toFile('theme.json')
+    print(Theme.fromFile('theme.json'))
