@@ -8,14 +8,17 @@ if __name__ == '__main__':
         dwmAccentColor=blue,
         dwmAccentColorInactive=blue,
         dwmColorPrevalence=True,
-        explorerAccentColorMenu=blue
+        explorerAccentColorMenu=blue,
+        wallpaper='C:\\Users\\thors\\Desktop\\msfs_2020_flat_panel_background_airbus_a320.png'
     )
 
     original = Theme(
         dwmAccentColor=orange,
         dwmAccentColorInactive=orange,
         dwmColorPrevalence=False,
-        explorerAccentColorMenu=orange
+        explorerAccentColorMenu=orange,
+        wallpaper='c:\\windows\\web\\wallpaper\\windows\\img0.jpg'
     )
 
+    WindowsTheme().loadTheme(original)
     print(WindowsTheme().currentTheme().toJson())
