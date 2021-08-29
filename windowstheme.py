@@ -34,7 +34,7 @@ class Theme:
         return json.dumps(asdict(self), indent=indent)
 
 
-class WindowsTheme:
+class WindowsThemeInterface:
 
     def __init__(self, rootHkey=winreg.HKEY_CURRENT_USER):
         self.__registryHkey = rootHkey
