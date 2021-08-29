@@ -1,5 +1,6 @@
+import json
 import winreg
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 
 @dataclass()
@@ -26,6 +27,9 @@ class Theme:
     dwmAccentColorInactive: ThemeColor
     dwmColorPrevalence: bool
     explorerAccentColorMenu: ThemeColor
+
+    def toJson(self, indent=4) -> str:
+        return json.dumps(asdict(self), indent=indent)
 
 
 class WindowsTheme:
@@ -57,6 +61,14 @@ class WindowsTheme:
         self.setDwmAccentColorInactive(theme.dwmAccentColorInactive)
         self.setDwmColorPrevalence(theme.dwmColorPrevalence)
         self.setExplorerAccentColor(theme.explorerAccentColorMenu)
+
+    def currentTheme(self) -> Theme:
+        return Theme(
+            dwmAccentColor=self.getDwmAccentColor(),
+            dwmAccentColorInactive=self.getDwmAccentColorInactive(),
+            dwmColorPrevalence=self.getDwmColorPrevalence(),
+            explorerAccentColorMenu=self.getExplorerAccentColor()
+        )
 
     # Accent Color
     def getDwmAccentColor(self) -> ThemeColor:
