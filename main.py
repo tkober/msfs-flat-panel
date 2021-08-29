@@ -1,26 +1,34 @@
-import json
+import time
 
-from windowstheme import WindowsThemeInterface, Theme, ThemeColor
+from windowstheme import WindowsThemeInterface, Theme
+import signal
+import sys
+
+ORIGINAL_THEME_PATH = '.tmp\\original_theme.json'
+
+def onSigInt(sig, frame):
+    theme = Theme.fromFile(ORIGINAL_THEME_PATH)
+    WindowsThemeInterface().loadTheme(theme)
+    print('Restored original theme')
+    sys.exit(0)
+
+def saveCurrentTheme(path: str):
+    WindowsThemeInterface().currentTheme().toFile(path)
+
+def main():
+    # Save current theme
+    saveCurrentTheme(ORIGINAL_THEME_PATH)
+    print('Saved current theme')
+
+    # Load A320 Theme
+    theme = Theme.fromFile('themes\\a320\\theme.json')
+    WindowsThemeInterface().loadTheme(theme)
+    print('Loaded theme "A320"')
+
+    signal.signal(signal.SIGINT, onSigInt)
+    while True:
+        time.sleep(1)
+
 
 if __name__ == '__main__':
-    orange = ThemeColor(r=247, g=86, b=22)
-    blue = ThemeColor(r=99, g=125, b=150)
-
-    a320Theme = Theme(
-        dwmAccentColor=blue,
-        dwmAccentColorInactive=blue,
-        dwmColorPrevalence=True,
-        explorerAccentColorMenu=blue,
-        wallpaper='C:\\Users\\thors\\Desktop\\msfs_2020_flat_panel_background_airbus_a320.png'
-    )
-
-    original = Theme(
-        dwmAccentColor=orange,
-        dwmAccentColorInactive=orange,
-        dwmColorPrevalence=False,
-        explorerAccentColorMenu=orange,
-        wallpaper='c:\\windows\\web\\wallpaper\\windows\\img0.jpg'
-    )
-
-    WindowsThemeInterface().currentTheme().toFile('theme.json')
-    print(Theme.fromFile('theme.json'))
+    main()

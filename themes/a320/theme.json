@@ -1,0 +1,19 @@
+{
+    "dwmAccentColor": {
+        "r": 99,
+        "g": 125,
+        "b": 150
+    },
+    "dwmAccentColorInactive": {
+        "r": 99,
+        "g": 125,
+        "b": 150
+    },
+    "dwmColorPrevalence": true,
+    "explorerAccentColorMenu": {
+        "r": 99,
+        "g": 125,
+        "b": 150
+    },
+    "wallpaper": "C:\\Users\\thors\\Desktop\\msfs_2020_flat_panel_background_airbus_a320.png"
+}
