@@ -1,3 +1,4 @@
+import ctypes
 import json
 import winreg
 from dataclasses import dataclass, asdict
@@ -27,6 +28,7 @@ class Theme:
     dwmAccentColorInactive: ThemeColor
     dwmColorPrevalence: bool
     explorerAccentColorMenu: ThemeColor
+    wallpaper: str
 
     def toJson(self, indent=4) -> str:
         return json.dumps(asdict(self), indent=indent)
@@ -61,13 +63,15 @@ class WindowsTheme:
         self.setDwmAccentColorInactive(theme.dwmAccentColorInactive)
         self.setDwmColorPrevalence(theme.dwmColorPrevalence)
         self.setExplorerAccentColor(theme.explorerAccentColorMenu)
+        self.setWallpaper(theme.wallpaper)
 
     def currentTheme(self) -> Theme:
         return Theme(
             dwmAccentColor=self.getDwmAccentColor(),
             dwmAccentColorInactive=self.getDwmAccentColorInactive(),
             dwmColorPrevalence=self.getDwmColorPrevalence(),
-            explorerAccentColorMenu=self.getExplorerAccentColor()
+            explorerAccentColorMenu=self.getExplorerAccentColor(),
+            wallpaper=self.getWallpaper()[1]
         )
 
     # Accent Color
@@ -104,3 +108,27 @@ class WindowsTheme:
     def setExplorerAccentColor(self, value: ThemeColor):
         regDwordValue = value.toRegDword()
         self.__setRegistryIntValue(self.__WindowsExplorerAccentRegistrySubkey, self.__explorerAccentColorMenuValue, regDwordValue)
+
+    # Wallpaper
+    def getWallpaper(self) -> (int, str):
+        SPI_GETDESKWALLPAPER = 0x0073
+        bufferSize = 200
+        buffer = ctypes.create_unicode_buffer(bufferSize)
+
+        success = ctypes.windll.user32.SystemParametersInfoW(
+            SPI_GETDESKWALLPAPER,
+            bufferSize,
+            buffer,
+            0
+        )
+        return success, str(buffer.value)
+
+    def setWallpaper(self, absolutePath: str) -> int:
+        SPI_SETDESKWALLPAPER = 0x0014
+        success = ctypes.windll.user32.SystemParametersInfoW(
+            SPI_SETDESKWALLPAPER,
+            0,
+            absolutePath,
+            0
+        )
+        return success
