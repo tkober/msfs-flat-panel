@@ -1,0 +1,120 @@
+{
+    "rectangle": {
+        "x": 885,
+        "y": 569,
+        "width": 260,
+        "height": 120
+    },
+    "aircraftRegistration": "D-KOBR",
+    "aircraftRegistrationStyle": {
+        "fontName": "segoeui.ttf",
+        "fontSize": 25,
+        "textColor": {
+            "r": 213,
+            "g": 218,
+            "b": 223
+        },
+        "position": {
+            "verticalReference": "Top",
+            "verticalOffset": 8,
+            "horizontalReference": "Left",
+            "horizontalOffset": 13
+        }
+    },
+    "selCalCode": {
+        "digit1": "D",
+        "digit2": "K",
+        "digit3": "B",
+        "digit4": "R"
+    },
+    "selCalCodeStyle": {
+        "fontName": "segoeui.ttf",
+        "fontSize": 25,
+        "textColor": {
+            "r": 213,
+            "g": 218,
+            "b": 223
+        },
+        "position": {
+            "verticalReference": "Top",
+            "verticalOffset": 8,
+            "horizontalReference": "Right",
+            "horizontalOffset": -13
+        }
+    },
+    "callsign": {
+        "airlineIcaoCode": "DLH",
+        "flightNumber": "6032"
+    },
+    "callsignStyle": {
+        "fontName": "segoeuib.ttf",
+        "fontSize": 30,
+        "textColor": {
+            "r": 213,
+            "g": 218,
+            "b": 223
+        },
+        "position": {
+            "verticalReference": "Bottom",
+            "verticalOffset": -18,
+            "horizontalReference": "Right",
+            "horizontalOffset": -13
+        }
+    },
+    "descriptions": [
+        {
+            "text": "SELCAL CODE",
+            "style": {
+                "fontName": "segoeuisl.ttf",
+                "fontSize": 10,
+                "textColor": {
+                    "r": 213,
+                    "g": 218,
+                    "b": 223
+                },
+                "position": {
+                    "verticalReference": "Top",
+                    "verticalOffset": 2,
+                    "horizontalReference": "Right",
+                    "horizontalOffset": -14
+                }
+            }
+        },
+        {
+            "text": "REGISTRATION",
+            "style": {
+                "fontName": "segoeuisl.ttf",
+                "fontSize": 10,
+                "textColor": {
+                    "r": 213,
+                    "g": 218,
+                    "b": 223
+                },
+                "position": {
+                    "verticalReference": "Top",
+                    "verticalOffset": 2,
+                    "horizontalReference": "Left",
+                    "horizontalOffset": 14
+                }
+            }
+        },
+        {
+            "text": "FLIGHT NUMBER",
+            "style": {
+                "fontName": "segoeuisl.ttf",
+                "fontSize": 10,
+                "textColor": {
+                    "r": 213,
+                    "g": 218,
+                    "b": 223
+                },
+                "position": {
+                    "verticalReference": "Bottom",
+                    "verticalOffset": -5,
+                    "horizontalReference": "Right",
+                    "horizontalOffset": -14
+                }
+            }
+        }
+    ]
+}
