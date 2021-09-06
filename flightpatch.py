@@ -253,19 +253,24 @@ class FlightPatchComposer:
         self.__backgroundImagePath = backgroundImagePath
         self.__image = Image.open(backgroundImagePath)
 
-    def composePatch(self, patch: FlightPatch) -> Image:
-        # Draw Aircraft Registration
-        self._drawText(patch.aircraftRegistration, patch.aircraftRegistrationStyle, patch.rectangle)
+    def composePatch(self, patch: FlightPatch, registration=True, selCalCode=True, callsign=True, descriptions=True) -> Image:
 
-        # Draw SelCal Code
-        self._drawText(patch.selCalCode.getFullCode(), patch.selCalCodeStyle, patch.rectangle)
+        if registration:
+            # Draw Aircraft Registration
+            self._drawText(patch.aircraftRegistration, patch.aircraftRegistrationStyle, patch.rectangle)
 
-        # Draw Callsign
-        self._drawText(patch.callsign.getFullValue(), patch.callsignStyle, patch.rectangle)
+        if selCalCode:
+            # Draw SelCal Code
+            self._drawText(patch.selCalCode.getFullCode(), patch.selCalCodeStyle, patch.rectangle)
 
-        # Draw Description Labels
-        for description in patch.descriptions:
-            self._drawText(description.text, description.style, patch.rectangle)
+        if callsign:
+            # Draw Callsign
+            self._drawText(patch.callsign.getFullValue(), patch.callsignStyle, patch.rectangle)
+
+        if descriptions:
+            # Draw Description Labels
+            for description in patch.descriptions:
+                self._drawText(description.text, description.style, patch.rectangle)
 
         return self.__image
 

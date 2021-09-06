@@ -57,9 +57,16 @@ class App:
         self.themeInterface.currentTheme().toFile(path)
         print('Saved current theme')
 
-    def addFlightPatchToWallpaper(self, path):
+    def addFlightPatchToWallpaper(self):
+        path = self.PANEL_BACKGROUND_PATH
         self.flightPatchComposer = FlightPatchComposer(self.config.backgroundImage)
-        image = self.flightPatchComposer.composePatch(self.config.flightPatch)
+        image = self.flightPatchComposer.composePatch(
+            patch=self.config.flightPatch,
+            registration=self.config.addRegistration,
+            selCalCode=self.config.addSelCalCode,
+            callsign=self.config.addCallsign,
+            descriptions=self.config.addDescriptions
+        )
         image.save(path, 'PNG')
         print('Generated panel background')
 
@@ -76,7 +83,7 @@ class App:
         # Generate complete panel background
         wallpaper = self.config.backgroundImage
         if self.config.addFlightPatch:
-            wallpaper = self.addFlightPatchToWallpaper(self.PANEL_BACKGROUND_PATH)
+            wallpaper = self.addFlightPatchToWallpaper()
 
         # Activate theme
         self.config.theme.wallpaper = os.path.abspath(wallpaper)
