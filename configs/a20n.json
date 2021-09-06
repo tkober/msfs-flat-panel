@@ -7,7 +7,7 @@
     "askForRegistration": true,
     "defaultRegistrationOnEmpty": true,
     "addSelCalCode": true,
-    "askSelCalCode": true,
+    "askForSelCalCode": true,
     "defaultSelCalCodeOnEmpty": true,
     "addCallsign": true,
     "askForCallsign": true,

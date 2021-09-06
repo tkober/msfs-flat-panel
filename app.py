@@ -5,7 +5,7 @@ import sys
 import time
 
 from flatpanel import FlatPanelConfig
-from flightpatch import FlightPatchComposer, Callsign
+from flightpatch import FlightPatchComposer, Callsign, SelCalCode
 from windowstheme import Theme, WindowsThemeInterface
 
 
@@ -64,6 +64,9 @@ class App:
         if self.config.addCallsign and self.config.askForCallsign:
             self.askForCallsign()
 
+        if self.config.addSelCalCode and self.config.askForSelCalCode:
+            self.askForSelCalCode()
+
         if self.config.addRegistration and self.config.askForRegistration:
             self.askForRegistration()
 
@@ -104,6 +107,21 @@ class App:
             )
             try:
                 self.config.flightPatch.callsign = Callsign(callsignString)
+                success = True
+            except ValueError as e:
+                print(f'{e}\n', file=sys.stderr)
+
+    def askForSelCalCode(self):
+        success = False
+
+        while not success:
+            selCalCodeString = self.askForUserInput(
+                "SelCal Code?",
+                self.config.defaultSelCalCodeOnEmpty,
+                self.config.flightPatch.selCalCode.getFullCode()
+            )
+            try:
+                self.config.flightPatch.selCalCode = SelCalCode(selCalCodeString)
                 success = True
             except ValueError as e:
                 print(f'{e}\n', file=sys.stderr)

@@ -18,7 +18,7 @@ class FlatPanelConfig:
     defaultRegistrationOnEmpty: bool
 
     addSelCalCode: bool
-    askSelCalCode: bool
+    askForSelCalCode: bool
     defaultSelCalCodeOnEmpty: bool
 
     addCallsign: bool
@@ -53,7 +53,7 @@ class FlatPanelConfig:
             askForRegistration=jsonObject['askForRegistration'],
             defaultRegistrationOnEmpty=jsonObject['defaultRegistrationOnEmpty'],
             addSelCalCode=jsonObject['addSelCalCode'],
-            askSelCalCode=jsonObject['askSelCalCode'],
+            askForSelCalCode=jsonObject['askForSelCalCode'],
             defaultSelCalCodeOnEmpty=jsonObject['defaultSelCalCodeOnEmpty'],
             addCallsign=jsonObject['addCallsign'],
             askForCallsign=jsonObject['askForCallsign'],
