@@ -5,7 +5,7 @@ import sys
 import time
 
 from flatpanel import FlatPanelConfig
-from flightpatch import FlightPatchComposer
+from flightpatch import FlightPatchComposer, Callsign
 from windowstheme import Theme, WindowsThemeInterface
 
 
@@ -61,6 +61,9 @@ class App:
         path = self.PANEL_BACKGROUND_PATH
         self.flightPatchComposer = FlightPatchComposer(self.config.backgroundImage)
 
+        if self.config.addCallsign and self.config.askForCallsign:
+            self.askForCallsign()
+
         if self.config.addRegistration and self.config.askForRegistration:
             self.askForRegistration()
 
@@ -89,6 +92,21 @@ class App:
             return fallbackValue
         else:
             return answer
+
+    def askForCallsign(self):
+        success = False
+
+        while not success:
+            callsignString = self.askForUserInput(
+                "Callsign?",
+                self.config.defaultCallsignOnEmpty,
+                self.config.flightPatch.callsign.getFullValue()
+            )
+            try:
+                self.config.flightPatch.callsign = Callsign(callsignString)
+                success = True
+            except ValueError as e:
+                print(f'{e}\n', file=sys.stderr)
 
     def askForRegistration(self):
         registration = self.askForUserInput(
