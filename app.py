@@ -108,6 +108,7 @@ class App:
             try:
                 self.config.flightPatch.callsign = Callsign(callsignString)
                 success = True
+                print(f'{self.config.flightPatch.callsign.getFullValue(" ")}\n')
             except ValueError as e:
                 print(f'{e}\n', file=sys.stderr)
 
@@ -118,11 +119,12 @@ class App:
             selCalCodeString = self.askForUserInput(
                 "SelCal Code?",
                 self.config.defaultSelCalCodeOnEmpty,
-                self.config.flightPatch.selCalCode.getFullCode()
+                self.config.flightPatch.selCalCode.getFullCode(' ')
             )
             try:
                 self.config.flightPatch.selCalCode = SelCalCode(selCalCodeString)
                 success = True
+                print(f'{self.config.flightPatch.selCalCode.getFullCode(" ")}\n')
             except ValueError as e:
                 print(f'{e}\n', file=sys.stderr)
 
@@ -133,6 +135,7 @@ class App:
             self.config.flightPatch.aircraftRegistration
         )
         self.config.flightPatch.aircraftRegistration = registration
+        print(f'{registration}\n')
 
     def activate(self):
         print(f'Loading: {self.config.manufacturer} '
