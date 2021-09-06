@@ -39,7 +39,7 @@
             "width": 260,
             "height": 120
         },
-        "aircraftRegistration": "D-KOBR",
+        "aircraftRegistration": "D-AIJE",
         "aircraftRegistrationStyle": {
             "fontName": "segoeui.ttf",
             "fontSize": 25,
@@ -78,7 +78,7 @@
         },
         "callsign": {
             "airlineIcaoCode": "DLH",
-            "flightNumber": "6032"
+            "flightNumber": "320"
         },
         "callsignStyle": {
             "fontName": "segoeuib.ttf",
