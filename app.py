@@ -60,6 +60,10 @@ class App:
     def addFlightPatchToWallpaper(self):
         path = self.PANEL_BACKGROUND_PATH
         self.flightPatchComposer = FlightPatchComposer(self.config.backgroundImage)
+
+        if self.config.addRegistration and self.config.askForRegistration:
+            self.askForRegistration()
+
         image = self.flightPatchComposer.composePatch(
             patch=self.config.flightPatch,
             registration=self.config.addRegistration,
@@ -71,6 +75,28 @@ class App:
         print('Generated panel background')
 
         return path
+
+    def askForUserInput(self, hint: str, fallbackOnEmpty=False, fallbackValue: str = None) -> str:
+
+        if fallbackOnEmpty:
+            promt = f'{hint} [{fallbackValue}]>'
+        else:
+            promt = f'{hint}>'
+
+        answer = input(promt)
+
+        if fallbackOnEmpty and len(answer) == 0:
+            return fallbackValue
+        else:
+            return answer
+
+    def askForRegistration(self):
+        registration = self.askForUserInput(
+            "Aircraft registration?",
+            self.config.defaultRegistrationOnEmpty,
+            self.config.flightPatch.aircraftRegistration
+        )
+        self.config.flightPatch.aircraftRegistration = registration
 
     def activate(self):
         print(f'Loading: {self.config.manufacturer} '
@@ -105,5 +131,4 @@ class App:
 
 
 if __name__ == '__main__':
-    answer = input('Press Enter to start...')
     App().run()

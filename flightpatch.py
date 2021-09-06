@@ -193,7 +193,7 @@ class Description:
             style=TextStyle.fromJsonObject(jsonObject['style'])
         )
 
-@dataclass(frozen=True)
+@dataclass()
 class FlightPatch:
     rectangle: Rectangle
 
