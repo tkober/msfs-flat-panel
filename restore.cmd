@@ -1,1 +1,1 @@
-python main.py --restore
+python app.py --restore

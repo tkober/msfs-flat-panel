@@ -40,24 +40,21 @@ class Theme:
     def toJson(self, indent=4) -> str:
         return json.dumps(asdict(self), indent=indent)
 
+    def fromJsonObject(jsonObject: dict):
+        return Theme(
+            dwmAccentColor=ThemeColor.fromJsonObject(jsonObject['dwmAccentColor']),
+            dwmAccentColorInactive=ThemeColor.fromJsonObject(jsonObject['dwmAccentColorInactive']),
+            explorerAccentColorMenu=ThemeColor.fromJsonObject(jsonObject['explorerAccentColorMenu']),
+            dwmColorPrevalence=jsonObject['dwmColorPrevalence'],
+            wallpaper=jsonObject['wallpaper']
+        )
+
     def fromFile(path: str):
         file = open(path)
         jsonObject = json.load(file)
         file.close()
 
-        dwmAccentColor = ThemeColor.fromJsonObject(jsonObject['dwmAccentColor'])
-        dwmAccentColorInactive = ThemeColor.fromJsonObject(jsonObject['dwmAccentColorInactive'])
-        explorerAccentColorMenu = ThemeColor.fromJsonObject(jsonObject['explorerAccentColorMenu'])
-        dwmColorPrevalence = jsonObject['dwmColorPrevalence']
-        wallpaper = jsonObject['wallpaper']
-
-        return Theme(
-            dwmAccentColor=dwmAccentColor,
-            dwmAccentColorInactive=dwmAccentColorInactive,
-            explorerAccentColorMenu=explorerAccentColorMenu,
-            dwmColorPrevalence=dwmColorPrevalence,
-            wallpaper=wallpaper
-        )
+        return Theme.fromJsonObject(jsonObject)
 
     def toFile(self, path: str, indent=4):
         file = open(path, 'w')

@@ -318,4 +318,5 @@ if __name__ == '__main__':
 
     composer = FlightPatchComposer(backgroundImagePath)
     image = composer.composePatch(patch)
-    image.save('test.png', 'PNG')
+    image.show()
+    #image.save('test.png', 'PNG')
