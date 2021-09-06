@@ -105,4 +105,5 @@ class App:
 
 
 if __name__ == '__main__':
+    answer = input('Press Enter to start...')
     App().run()
