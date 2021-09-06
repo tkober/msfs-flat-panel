@@ -12,6 +12,21 @@ class FlatPanelConfig:
     aircraftType: str
     typeDesignatorIcao: str
     addFlightPatch: bool
+
+    addRegistration: bool
+    askForRegistration: bool
+    defaultRegistrationOnEmpty: bool
+
+    addSelCalCode: bool
+    askSelCalCode: bool
+    defaultSelCalCodeOnEmpty: bool
+
+    addCallsign: bool
+    askForCallsign: bool
+    defaultCallsignOnEmpty: bool
+
+    addDescriptions: bool
+
     theme: Theme
     flightPatch: FlightPatch
     backgroundImage: str
@@ -34,6 +49,16 @@ class FlatPanelConfig:
             aircraftType=jsonObject['aircraftType'],
             typeDesignatorIcao=jsonObject['typeDesignatorIcao'],
             addFlightPatch=jsonObject['addFlightPatch'],
+            addRegistration=jsonObject['addRegistration'],
+            askForRegistration=jsonObject['askForRegistration'],
+            defaultRegistrationOnEmpty=jsonObject['defaultRegistrationOnEmpty'],
+            addSelCalCode=jsonObject['addSelCalCode'],
+            askSelCalCode=jsonObject['askSelCalCode'],
+            defaultSelCalCodeOnEmpty=jsonObject['defaultSelCalCodeOnEmpty'],
+            addCallsign=jsonObject['addCallsign'],
+            askForCallsign=jsonObject['askForCallsign'],
+            defaultCallsignOnEmpty=jsonObject['defaultCallsignOnEmpty'],
+            addDescriptions=jsonObject['addDescriptions'],
             theme=Theme.fromJsonObject(jsonObject['theme']),
             flightPatch=FlightPatch.fromJsonObject(jsonObject['flightPatch']),
             backgroundImage=jsonObject['backgroundImage']

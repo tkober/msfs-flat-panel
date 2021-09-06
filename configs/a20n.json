@@ -3,6 +3,16 @@
     "aircraftType": "A320neo",
     "typeDesignatorIcao": "A20N",
     "addFlightPatch": true,
+    "addRegistration": true,
+    "askForRegistration": true,
+    "defaultRegistrationOnEmpty": true,
+    "addSelCalCode": true,
+    "askSelCalCode": true,
+    "defaultSelCalCodeOnEmpty": true,
+    "addCallsign": true,
+    "askForCallsign": true,
+    "defaultCallsignOnEmpty": true,
+    "addDescriptions": true,
     "theme": {
         "dwmAccentColor": {
             "r": 99,
