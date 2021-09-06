@@ -2,6 +2,7 @@
     "manufacturer": "Airbus",
     "aircraftType": "A320neo",
     "typeDesignatorIcao": "A20N",
+    "addFlightPatch": true,
     "theme": {
         "dwmAccentColor": {
             "r": 99,

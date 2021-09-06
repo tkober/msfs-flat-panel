@@ -11,6 +11,7 @@ class FlatPanelConfig:
     manufacturer: str
     aircraftType: str
     typeDesignatorIcao: str
+    addFlightPatch: bool
     theme: Theme
     flightPatch: FlightPatch
     backgroundImage: str
@@ -32,6 +33,7 @@ class FlatPanelConfig:
             manufacturer=jsonObject['manufacturer'],
             aircraftType=jsonObject['aircraftType'],
             typeDesignatorIcao=jsonObject['typeDesignatorIcao'],
+            addFlightPatch=jsonObject['addFlightPatch'],
             theme=Theme.fromJsonObject(jsonObject['theme']),
             flightPatch=FlightPatch.fromJsonObject(jsonObject['flightPatch']),
             backgroundImage=jsonObject['backgroundImage']

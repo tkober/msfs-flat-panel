@@ -57,6 +57,14 @@ class App:
         self.themeInterface.currentTheme().toFile(path)
         print('Saved current theme')
 
+    def addFlightPatchToWallpaper(self, path):
+        self.flightPatchComposer = FlightPatchComposer(self.config.backgroundImage)
+        image = self.flightPatchComposer.composePatch(self.config.flightPatch)
+        image.save(path, 'PNG')
+        print('Generated panel background')
+
+        return path
+
     def activate(self):
         print(f'Loading: {self.config.manufacturer} '
               f'{self.config.aircraftType} '
@@ -66,17 +74,14 @@ class App:
         self.saveCurrentTheme(self.ORIGINAL_THEME_PATH)
 
         # Generate complete panel background
-        self.flightPatchComposer = FlightPatchComposer(self.config.backgroundImage)
-        image = self.flightPatchComposer.composePatch(self.config.flightPatch)
-        image.save(self.PANEL_BACKGROUND_PATH, 'PNG')
-        print('Generated panel background')
-
-        # Set generated panel background as theme wallpaper (as absolute path)
-        self.config.theme.wallpaper = os.path.abspath(self.PANEL_BACKGROUND_PATH)
-        print('Activated theme')
+        wallpaper = self.config.backgroundImage
+        if self.config.addFlightPatch:
+            wallpaper = self.addFlightPatchToWallpaper(self.PANEL_BACKGROUND_PATH)
 
         # Activate theme
+        self.config.theme.wallpaper = os.path.abspath(wallpaper)
         self.themeInterface.loadTheme(self.config.theme)
+        print('Activated theme')
 
     def runConfig(self, configFile):
         self.config = FlatPanelConfig.fromFile(configFile)
